@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GalaxyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +25,15 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
 
-    //Route::post('/home', [App\Http\Controllers\ReportsController::class, 'store']);
+    Route::group(['prefix' => 'galaxy'], function () {
+        Route::post('/create/{id}', [GalaxyController::class, 'store'])->name('galaxy.create');
+        //Route::get('/edit/{id_paciente}', [GalaxyController::class, 'edit'])->name('paciente.edit');
+        //Route::put('/update/{id_paciente}', [GalaxyController::class, 'update']);
+        //Route::get('/search', [GalaxyController::class, 'index']);
+
+        //Route::get('/show', [GalaxyController::class, 'index']);
+        Route::get('/create', [GalaxyController::class, 'create'])->name('galaxy.index');
+    });
 
     Route::get('/logout', [LogoutController::class, 'logout']);
 });

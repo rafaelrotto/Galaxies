@@ -28,7 +28,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a id="pageTitle" class="navbar-brand" href="{{ url('/home') }}">
                     Galaxies
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -45,8 +45,8 @@
                             Galáxia
                         </button>
                         <div class="dropdown-menu" id="GalaxiesDropdown" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Cadastrar</a>
-                            <a class="dropdown-item" href="#">Consultar</a>
+                            <a class="dropdown-item" href="{{ route('galaxy.index') }}">Criar</a>
+                            <a class="dropdown-item" href="/galaxy/search">Consultar</a>
                         </div>
                         <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="UserButton" onclick="showUserDropdown()" onmouseover="removeGalaxiesDropdown()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{ Auth::user()->name }}
@@ -65,7 +65,20 @@
                 </div>
             </div>
         </nav>
-
+        <div class="container-fluid">
+            <div class="row">
+                <div id="msg">
+                    @if(session('msg'))
+                    <p class="msg">{{ session('msg')}}</p>
+                    @endif
+                </div>
+                <div id="alertmsg">
+                    @if(session('alertmsg'))
+                    <p class="alertmsg">{{ session('alertmsg')}}</p>
+                    @endif
+                </div>
+            </div>
+        </div>
         <main class="py-4">
             @yield('content')
         </main>
@@ -76,3 +89,4 @@
 
 <!-- Scripts -->
 <script src="{{ asset('js/dropdown.js') }}"></script>
+<script src="{{ asset('js/timeout.js') }}"></script>

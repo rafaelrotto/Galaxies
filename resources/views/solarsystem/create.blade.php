@@ -4,7 +4,7 @@
 <div id="create-container" class="container-sm">
     <form class="form" action="/galaxy/create/ {{ Auth::user()->id }}" method="POST">
         @csrf
-        <h1>Galáxia</h1>
+        <h1>Sistema Solar</h1>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="name">Nome</label>

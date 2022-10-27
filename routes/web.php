@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GalaxyController;
+use App\Http\Controllers\SolarSystemController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,16 @@ Route::group(['middleware' => 'auth'], function () {
 
         //Route::get('/show', [GalaxyController::class, 'index']);
         Route::get('/create', [GalaxyController::class, 'create'])->name('galaxy.index');
+    });
+
+    Route::group(['prefix' => 'solarsystem'], function () {
+        Route::post('/create/{id}', [SolarSystemController::class, 'store'])->name('solarsystem.create');
+        //Route::get('/edit/{id_paciente}', [SolarSystemController::class, 'edit'])->name('paciente.edit');
+        //Route::put('/update/{id_paciente}', [SolarSystemController::class, 'update']);
+        //Route::get('/search', [SolarSystemController::class, 'index']);
+
+        //Route::get('/show', [SolarSystemController::class, 'index']);
+        Route::get('/create', [SolarSystemController::class, 'create'])->name('solarsystem.index');
     });
 
     Route::get('/logout', [LogoutController::class, 'logout']);

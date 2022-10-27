@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 class GalaxyController extends Controller
 {
     public function create(){
-        return view('galaxy/create');
+
+        $flag = 0;
+        return view('galaxy.create', ['flag' => $flag]);
     }
 
     public function store(GalaxyRequest $request, $id){
@@ -19,6 +21,8 @@ class GalaxyController extends Controller
 
         galaxy::query()->create($data);
 
-        return redirect('galaxy/create')->with('msg', 'Galáxia criada com sucesso!');
+        $flag = 1;
+
+        return view('galaxy.create', ['flag' => $flag])->with('msg', 'Galáxia criada com sucesso!');
     }
 }
